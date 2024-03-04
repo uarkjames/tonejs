@@ -4,11 +4,54 @@
     <title>Tone.js Playground</title>
     <!-- See https://tonejs.github.io/ for library details. -->
     <style type="text/css">
+      <!-- HTML !-->
+<button class="button-8" role="button">Button 8</button>
+      /* Thanks to CSS Scan for a start on the button styles: https://getcssscan.com/css-buttons-examples */
+      .buttonUp {
+        background-color: lightslategray;
+        border-radius: 3px;
+        border: 1px solid #7aa7c7;
+        box-shadow: rgba(255, 255, 255, .7) 0 1px 0 0 inset;
+        box-sizing: border-box;
+        color: #39739d;
+        cursor: pointer;
+        display: inline-block;
+        font-family: -apple-system,system-ui,"Segoe UI","Liberation Sans",sans-serif;
+        font-size: 13px;
+        font-weight: 400;
+        line-height: 1.15385;
+        margin: 0;
+        outline: none;
+        padding: 8px .8em;
+        position: relative;
+        text-align: center;
+        text-decoration: none;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        vertical-align: baseline;
+        white-space: nowrap;
+      }
+
+      .buttonUp:hover,
+      .buttonUp:focus {
+        background-color: lightslategray;
+        border-radius: 3px;
+      }
+
+      .buttonUp:focus {
+        box-shadow: 0 0 0 4px rgba(0, 149, 255, .15);
+      }
+
+      .buttonUp:active {
+        background-color: lightslategray;
+        box-shadow: none;
+        color: whitesmoke;
+      }
       .buttonDown {
         background-color: lightslategray;
-      }
-      .buttonUp {
-        background-color: white;
+        border-radius: 3px;
+        color: whitesmoke;
       }
     </style>
     <!-- Load Tone.js from cdnjs -->
@@ -57,7 +100,7 @@
             document.getElementById("btnC5").className = 'buttonDown';
           }
 
-          console.log("keyed note: " + event.key);
+          console.log("key pressed: " + event.key);
       });
 
       // Play a random chord with n=i notes
@@ -90,15 +133,15 @@
     </script>
   </head>
   <body>
-    <input id="btnC4" type="button" value="C4" onclick="playNote(this.value);" />
-    <input id="btnD4" type="button" value="D4" onclick="playNote(this.value);" />
-    <input id="btnE4" type="button" value="E4" onclick="playNote(this.value);" />
-    <input id="btnF4" type="button" value="F4" onclick="playNote(this.value);" />
-    <input id="btnG4" type="button" value="G4" onclick="playNote(this.value);" />
-    <input id="btnA4" type="button" value="A4" onclick="playNote(this.value);" />
-    <input id="btnB4" type="button" value="B4" onclick="playNote(this.value);" />
-    <input id="btnC5" type="button" value="C5" onclick="playNote(this.value);" />
-    <input id="randomMelody" type="button" value="randomChord" onclick="randomChord()" />
-    <input id="randomMelody" type="button" value="randomMelody" onclick="randomMelody()" />
+    <input id="btnC4" class="buttonUp" type="button" value="C4" onclick="playNote(this.value);" />
+    <input id="btnD4" class="buttonUp" type="button" value="D4" onclick="playNote(this.value);" />
+    <input id="btnE4" class="buttonUp" type="button" value="E4" onclick="playNote(this.value);" />
+    <input id="btnF4" class="buttonUp" type="button" value="F4" onclick="playNote(this.value);" />
+    <input id="btnG4" class="buttonUp" type="button" value="G4" onclick="playNote(this.value);" />
+    <input id="btnA4" class="buttonUp" type="button" value="A4" onclick="playNote(this.value);" />
+    <input id="btnB4" class="buttonUp" type="button" value="B4" onclick="playNote(this.value);" />
+    <input id="btnC5" class="buttonUp" type="button" value="C5" onclick="playNote(this.value);" />
+    <input id="randomMelody" class="buttonUp" type="button" value="randomChord" onclick="randomChord()" />
+    <input id="randomMelody" class="buttonUp" type="button" value="randomMelody" onclick="randomMelody()" />
   </body>
 </html>
