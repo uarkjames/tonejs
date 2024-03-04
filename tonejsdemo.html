@@ -33,6 +33,9 @@
     <!-- Load Tone.js from cdnjs -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
     <script type="text/javascript">
+    // Ensure the windows is loaded before you try to change it 
+    window.onload = function() {
+
       // Define the synth engine
       function playNote(passedNoteValue) {
         const synth = new Tone.Synth().toDestination();
@@ -40,36 +43,56 @@
         synth.triggerAttackRelease(note, "32n");
       }
 
+      // Define the keys (left) and their notes (right)
+      const notesMap = {
+        a: "C4",
+        s: "D4",
+        d: "E4",
+        f: "F4",
+        g: "G4",
+        h: "A4",
+        j: "B4",
+        k: "C5"
+      };
+
       // Set up keyboard event listeners
       document.addEventListener('keydown', (event)=> {    
           
-          // reset the button colors
-          const buttons = ['btnC4', 'btnD4', 'btnE4', 'btnF4', 'btnG4', 'btnA4', 'btnB4', 'btnC5'];
-          buttons.forEach((buttonId) => {
-            document.getElementById(buttonId).className = 'buttonUp';
-          });
-
-          // listen for keys, play notes, change button colors
-          const notesMap = {
-            a: "C4",
-            s: "D4",
-            d: "E4",
-            f: "F4",
-            g: "G4",
-            h: "A4",
-            j: "B4",
-            k: "C5"
-          };
-
-          for (const [key, note] of Object.entries(notesMap)) {
-            if (event.key === key) {
-              playNote(note);
-              document.getElementById(`btn${note}`).className = 'buttonDown';
-              break;
-            }
-          }
-          console.log("key pressed: " + event.key);
+      // Reset the button colors
+      const buttons = ['btnC4', 'btnD4', 'btnE4', 'btnF4', 'btnG4', 'btnA4', 'btnB4', 'btnC5'];
+      buttons.forEach((buttonId) => {
+        document.getElementById(buttonId).className = 'buttonUp';
       });
+
+      // listen for keys, play notes, change button colors
+      for (const [key, note] of Object.entries(notesMap)) {
+        if (event.key === key) {
+          playNote(note);
+          document.getElementById(`btn${note}`).className = 'buttonDown';
+          break;
+          }
+        }
+        console.log("key pressed: " + event.key);
+      });
+
+      /* Set up (most of) the buttons on the front end */
+      // Select the existing button container
+      const buttonsContainer = document.querySelector("#buttonContainer");
+
+      // Iterate over the notes map and create a button for each note
+      for (const [key, note] of Object.entries(notesMap)) {
+        const button = document.createElement("button");
+        button.id = `btn${note}`;
+        button.className = "buttonUp";
+        button.value = note;
+        button.innerText = note;
+        button.onclick = () => playNote(note);
+        buttonsContainer.appendChild(button);
+      }
+
+      // Set up event listeners for the "Random Chord" and "Random Melody" buttons
+      document.getElementById("randomChordBtn").addEventListener("click", randomChord);
+      document.getElementById("randomMelodyBtn").addEventListener("click", randomMelody);
 
       // Play a random chord with n=i notes
       function randomChord() {
@@ -97,20 +120,16 @@
           theTimeout = theTimeout + 1000; 
         }
       }
+    } // don't delete me
 
     </script>
   </head>
   <body>
-    <input id="btnC4" class="buttonUp" type="button" value="C4" onclick="playNote(this.value);" />
-    <input id="btnD4" class="buttonUp" type="button" value="D4" onclick="playNote(this.value);" />
-    <input id="btnE4" class="buttonUp" type="button" value="E4" onclick="playNote(this.value);" />
-    <input id="btnF4" class="buttonUp" type="button" value="F4" onclick="playNote(this.value);" />
-    <input id="btnG4" class="buttonUp" type="button" value="G4" onclick="playNote(this.value);" />
-    <input id="btnA4" class="buttonUp" type="button" value="A4" onclick="playNote(this.value);" />
-    <input id="btnB4" class="buttonUp" type="button" value="B4" onclick="playNote(this.value);" />
-    <input id="btnC5" class="buttonUp" type="button" value="C5" onclick="playNote(this.value);" />
-    <input id="randomMelody" class="buttonUp" type="button" value="randomChord" onclick="randomChord()" />
-    <input id="randomMelody" class="buttonUp" type="button" value="randomMelody" onclick="randomMelody()" />
+
+    <div id="buttonContainer"></div>
+
+    <button id="randomChordBtn">Random Chord</button>
+    <button id="randomMelodyBtn">Random Melody</button>
 
   </body>
 </html>
