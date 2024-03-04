@@ -4,33 +4,9 @@
     <title>Tone.js Playground</title>
     <!-- See https://tonejs.github.io/ for library details. -->
     <style type="text/css">
-      <!-- HTML !-->
-<button class="button-8" role="button">Button 8</button>
-      /* Thanks to CSS Scan for a start on the button styles: https://getcssscan.com/css-buttons-examples */
       .buttonUp {
         background-color: lightslategray;
         border-radius: 3px;
-        border: 1px solid #7aa7c7;
-        box-shadow: rgba(255, 255, 255, .7) 0 1px 0 0 inset;
-        box-sizing: border-box;
-        color: #39739d;
-        cursor: pointer;
-        display: inline-block;
-        font-family: -apple-system,system-ui,"Segoe UI","Liberation Sans",sans-serif;
-        font-size: 13px;
-        font-weight: 400;
-        line-height: 1.15385;
-        margin: 0;
-        outline: none;
-        padding: 8px .8em;
-        position: relative;
-        text-align: center;
-        text-decoration: none;
-        user-select: none;
-        -webkit-user-select: none;
-        touch-action: manipulation;
-        vertical-align: baseline;
-        white-space: nowrap;
       }
 
       .buttonUp:hover,
@@ -74,32 +50,24 @@
           });
 
           // listen for keys, play notes, change button colors
-          if (event.key == "a") {
-            playNote("C4");
-            document.getElementById("btnC4").className = 'buttonDown'; 
-          } else if (event.key == "s") {
-            playNote("D4");
-            document.getElementById("btnD4").className = 'buttonDown';
-          } else if (event.key == "d") {
-            playNote("E4");
-            document.getElementById("btnE4").className = 'buttonDown';
-          } else if (event.key == "f") {
-            playNote("F4");
-            document.getElementById("btnF4").className = 'buttonDown';
-          } else if (event.key == "g") {
-            playNote("G4");
-            document.getElementById("btnG4").className = 'buttonDown';
-          } else if (event.key == "h") {
-            playNote("A4"); 
-            document.getElementById("btnA4").className = 'buttonDown';
-          } else if (event.key == "j") {
-            playNote("B4");
-            document.getElementById("btnB4").className = 'buttonDown';
-          } else if (event.key == "k") {
-            playNote("C5");
-            document.getElementById("btnC5").className = 'buttonDown';
-          }
+          const notesMap = {
+            a: "C4",
+            s: "D4",
+            d: "E4",
+            f: "F4",
+            g: "G4",
+            h: "A4",
+            j: "B4",
+            k: "C5"
+          };
 
+          for (const [key, note] of Object.entries(notesMap)) {
+            if (event.key === key) {
+              playNote(note);
+              document.getElementById(`btn${note}`).className = 'buttonDown';
+              break;
+            }
+          }
           console.log("key pressed: " + event.key);
       });
 
