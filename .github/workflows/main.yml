@@ -4,5 +4,5 @@ name: HTML Preview
 uses: pavi2410/html-preview-action@v2
   with:
     # The HTML file you want to preview, relative to the root of the repo
-    html_file: # default is index.html
+    html_file: tonejsdemo.html # default is index.html
           
